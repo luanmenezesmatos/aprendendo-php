@@ -1,7 +1,7 @@
 CREATE DATABASE saguadim;
 USE saguadim;
 
---> CRIAÇÃO DA TABELA DE USUÁRIOS
+-- CRIAÇÃO DA TABELA DE USUÁRIOS
 CREATE TABLE usuarios(
     usu_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     usu_login VARCHAR(20) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE usuarios(
     usu_key VARCHAR(10) NOT NULL
 );
 
---> CRIAÇÃO DA TABELA DE CLIENTES
+-- CRIAÇÃO DA TABELA DE CLIENTES
 CREATE TABLE clientes(
     cli_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     cli_nome VARCHAR(50) NOT NULL,
@@ -20,5 +20,77 @@ CREATE TABLE clientes(
     cli_curso VARCHAR(50) NOT NULL,
     cli_sala INT NOT NULL,
     cli_status CHAR(1) NOT NULL,
-    cli_saldo FLOAT(10,2) NOT NULL,
+    cli_saldo FLOAT(10,2) NOT NULL
 );
+
+-- CRIAÇÃO DA TABELA DE PRODUTOS
+CREATE TABLE produtos(
+    pro_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    pro_nome VARCHAR(100) NOT NULL,
+    pro_descricao VARCHAR(150) NOT NULL,
+    pro_custo DECIMAL(10,2) NOT NULL,
+    pro_preco DECIMAL(10,2) NOT NULL,
+    pro_quantidade INT NOT NULL,
+    pro_validade DATE NOT NULL,
+    pro_status CHAR(1) NOT NULL,
+    fk_for_id INT NOT NULL
+);
+
+-- CRIAÇÃO DA TABELA DE ENCOMENDAS
+CREATE TABLE encomendas(
+    enc_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    enc_dataemissao DATETIME NOT NULL,
+    enc_dataentrega DATETIME NOT NULL,
+    enc_status CHAR(1) NOT NULL,
+    enc_valortotal DECIMAL(10,2) NOT NULL,
+    fk_pro_id INT NOT NULL,
+    fk_cli_id INT NOT NULL,
+    fk_ven_id INT NOT NULL
+);
+
+-- CRIAÇÃO DA TABELA DE VENDAS
+CREATE TABLE vendas(
+    ven_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ven_data DATETIME NOT NULL,
+    ven_valor DECIMAL(10,2) NOT NULL,
+    fk_cli_id INT NOT NULL,
+    fk_iv_codigo VARCHAR(50) NOT NULL
+);
+
+-- CRIAÇÃO DA TABELA ITEM DE VENDA
+CREATE TABLE item_venda(
+    iv_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    iv_quantidade INT NOT NULL,
+    iv_total DECIMAL(10,2) NOT NULL,
+    iv_codigo VARCHAR(50) NOT NULL,
+    fk_pro_id INT NOT NULL
+);
+
+-- CRIAÇÃO DA TABELA LOG
+CREATE TABLE tab_log(
+    tab_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    tab_query TEXT NOT NULL,
+    tab_data DATETIME NOT NULL
+);
+
+-- CRIAÇÃO DA TABELA DE FORNECEDORES
+CREATE TABLE fornecedores(
+    for_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    for_nome VARCHAR(100) NOT NULL
+);
+
+-- CHAVES ESTRANGEIRAS
+
+-- CHAVE ESTRANGEIRA DA TABELA DE PRODUTOS
+ALTER TABLE produtos ADD CONSTRAINT fk_for_id_pro FOREIGN KEY (fk_for_id) REFERENCES fornecedores(for_id);
+
+-- CHAVE ESTRANGEIRA DA TABELA DE ENCOMENDAS
+ALTER TABLE encomendas ADD CONSTRAINT fk_pro_id_enc FOREIGN KEY (fk_pro_id) REFERENCES produtos(pro_id);
+ALTER TABLE encomendas ADD CONSTRAINT fk_cli_id_enc FOREIGN KEY (fk_cli_id) REFERENCES clientes(cli_id);
+ALTER TABLE encomendas ADD CONSTRAINT fk_ven_id_enc FOREIGN KEY (fk_ven_id) REFERENCES vendas(ven_id);
+
+-- CHAVE ESTRANGEIRA DA TABELA DE VENDAS
+ALTER TABLE vendas ADD CONSTRAINT fk_cli_id_ven FOREIGN KEY (fk_cli_id) REFERENCES clientes(cli_id);
+
+-- CHAVE ESTRANGEIRA DA TABELA DE ITEM DE VENDA
+ALTER TABLE item_venda ADD CONSTRAINT fk_pro_id_iv FOREIGN KEY (fk_pro_id) REFERENCES produtos(pro_id);
