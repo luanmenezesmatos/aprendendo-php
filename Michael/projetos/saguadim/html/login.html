@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
+
+    <title>Página de Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-image">
+        <img src="../assets/img/undraw_access_account_re_8spm.svg" alt="" />
+      </div>
+
+      <div class="form">
+        <form action="../php/login.php" method="post">
+          <div class="form-header">
+            <div class="title">
+              <h1>Entre na sua conta!</h1>
+            </div>
+
+            <div class="register-button">
+              <button><a href="./cadastro.html">Cadastrar</a></button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-box">
+              <label for="email">E-mail</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Digite o seu e-mail"
+                required
+              />
+            </div>
+
+            <div class="input-box">
+              <label for="senha">Senha</label>
+              <input
+                id="senha"
+                type="password"
+                name="senha"
+                placeholder="Digite a sua senha"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-button">
+            <button type="submit">Entrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

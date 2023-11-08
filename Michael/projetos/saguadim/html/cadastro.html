@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
+
+    <title>Página de Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-image">
+        <img src="../assets/img/undraw_access_account_re_8spm.svg" alt="" />
+      </div>
+
+      <div class="form">
+        <form action="../php/cadastro.php" method="post">
+          <div class="form-header">
+            <div class="title">
+              <h1>Crie a sua conta!</h1>
+            </div>
+
+            <div class="register-button">
+              <button><a href="./login.html">Logar</a></button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-box">
+              <label for="usuario">Usuário</label>
+              <input
+                id="usuario"
+                type="usuario"
+                name="usuario"
+                placeholder="Digite o seu usuário"
+                required
+              />
+            </div>
+
+            <div class="input-box">
+              <label for="email">E-mail</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Digite o seu e-mail"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-box">
+              <label for="senha">Senha</label>
+              <input
+                id="senha"
+                type="password"
+                name="senha"
+                placeholder="Digite a sua senha"
+                required
+              />
+            </div>
+
+            <div class="input-box">
+              <label for="senha">Confirmar Senha</label>
+              <input
+                id="senha"
+                type="password"
+                name="senha"
+                placeholder="Confirme a sua senha"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-button">
+            <button><a href="#">Cadastrar</a></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
