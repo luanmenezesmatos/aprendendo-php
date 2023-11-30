@@ -25,7 +25,7 @@ $nomeusuario = $_SESSION['nomeusuario'];
             <?php
             } else {
               echo "<script>window.alert('Usuário não autenticado!')
-                window.location.href='../../../html/login.html';</script>";
+                window.location.href='../html/login.html';</script>";
             }
             ?>
           </h1>
